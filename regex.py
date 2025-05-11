@@ -139,12 +139,12 @@ class RegexFSM:
             curr_state.next_states.append(tmp_next_state)
             prev_state = curr_state
             curr_state = tmp_next_state
-            if prev_stars and not isinstance(prev_state, StartState) and not isinstance(prev_state, StarState):
+            if prev_stars and not isinstance(prev_state, StartState | StarState) and (i + skip) < size:
                 prev_stars.clear()
             for prev_star in prev_stars - {prev_state}:
                 prev_star.next_states.append(tmp_next_state)
-            if isinstance(tmp_next_state, StarState):
-                prev_stars.add(tmp_next_state)
+            # if isinstance(tmp_next_state, StarState):
+            prev_stars.add(tmp_next_state)
 
             i += skip
         if not isinstance(curr_state, StarState):
@@ -193,6 +193,10 @@ class RegexFSM:
 
 
 if __name__ == "__main__":
+    r = 'ab*'
+    regex_compiled = RegexFSM(r)
+    print(regex_compiled.check_string("a"))  # False
+
     regex_pattern = "a*4.+hi"
 
     regex_compiled = RegexFSM(regex_pattern)

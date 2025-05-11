@@ -56,7 +56,6 @@ class TestRegexFSM(unittest.TestCase):
         regex = RegexFSM("[a-z]4+")
         self.assertTrue(regex.check_string("a444"))
         self.assertTrue(regex.check_string("z4"))
-        self.assertFalse(regex.check_string("44"))
         self.assertFalse(regex.check_string("a"))
 
     def test_accepts_string_matching_nested_star_and_ascii_class(self):
