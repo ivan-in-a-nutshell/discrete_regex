@@ -63,3 +63,15 @@ python -m unittest test_regex.py
 
 - Only supports a subset of regex syntax.
 - Does not support nested groups, alternation (`|`), or advanced features.
+
+## Code explanation
+
+For every symbol in "regex" expression we create a state. 
+If a symbol is a character, we create a state with that character.
+If there is a character class, we create a state with all characters in the class.
+However, if after character or class comes a plus or a star, we create a plus or star state which can loop to themselves.
+If there is a dot, we create a state with all characters in the ASCII table.
+
+For loop states we also add a transition to the next states to handle different 'regexes'.
+
+After going through the given string, we check if we can reach Terminal state from the last state.

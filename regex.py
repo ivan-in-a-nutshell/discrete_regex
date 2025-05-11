@@ -143,7 +143,6 @@ class RegexFSM:
                 prev_stars.clear()
             for prev_star in prev_stars - {prev_state}:
                 prev_star.next_states.append(tmp_next_state)
-            # if isinstance(tmp_next_state, StarState):
             prev_stars.add(tmp_next_state)
 
             i += skip
